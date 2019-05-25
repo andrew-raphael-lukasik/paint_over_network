@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6540544695530794510}
   - component: {fileID: -5467006204187227484}
   m_Layer: 0
-  m_Name: PlayerPrefab
+  m_Name: Player Identity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,5 +77,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58694fd9ab23eb8429047f4b0b75886b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasPrefab: {fileID: 3267186010055220318, guid: 2d915ffa61c606c46bf59a298941ead2,
+  _uiPrefab: {fileID: 7393978349325778374, guid: 2d915ffa61c606c46bf59a298941ead2,
     type: 3}
