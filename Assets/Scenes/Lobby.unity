@@ -228,10 +228,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 3}
-      propertyPath: m_UseSimulator
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 3}
       propertyPath: m_OfflineScene
       value: Lobby
       objectReference: {fileID: 0}
@@ -267,7 +263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 3}
       propertyPath: m_Channels.Array.data[2]
-      value: 9
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475086, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 3}
+      propertyPath: m_UseSimulator
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22453414, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 3}
       propertyPath: m_SizeDelta.y

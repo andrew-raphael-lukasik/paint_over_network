@@ -79,3 +79,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiPrefab: {fileID: 7393978349325778374, guid: 2d915ffa61c606c46bf59a298941ead2,
     type: 3}
+  _imagePrefab: {fileID: 5818589987174837126, guid: 7513d9f87348c1c498eb0626007fd16d,
+    type: 3}
