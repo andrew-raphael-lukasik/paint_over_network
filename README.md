@@ -1,1 +1,1 @@
-# paint_over_network
+# paint over (unet) network
