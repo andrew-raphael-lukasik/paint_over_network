@@ -1740,8 +1740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawable: {fileID: 3267186010055220317}
-  _imagePrefab: {fileID: 5818589987174837126, guid: 7513d9f87348c1c498eb0626007fd16d,
-    type: 3}
 --- !u!114 &3267186010055220317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1965,8 +1963,8 @@ RectTransform:
   m_Father: {fileID: 712684744640747662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.1}
+  m_AnchorMax: {x: 1, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2002,7 +2000,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -2046,10 +2044,10 @@ RectTransform:
   m_Father: {fileID: 6685619135862109062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -17}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.4, y: 0.9}
+  m_AnchorMax: {x: 0.6, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: -2, y: -5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5934312436774093559
 CanvasRenderer:
