@@ -1,4 +1,4 @@
-# EXPERIMENT GOAL: send textures via (unet) network, fast
+# EXPERIMENT: send textures via (unet) network, fast
 
 Features:
 - client can draw simple pictures
