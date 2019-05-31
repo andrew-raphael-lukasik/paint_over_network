@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using LZMA = SevenZip.Compression.LZMA.SevenZipHelper;
 
 using UnityEngine;
-using UnityEngine.Networking;
+
+using Mirror;
 
 public class PlayerUI : NetworkBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerUI : NetworkBehaviour
         var texture = _drawable.texture;
         byte[] bytes = LZMA.Compress( texture.GetRawTextureData() );
         int buffer = System.DateTime.Now.GetHashCode();
-        int byteLimit = 1300;//63800; //channel limit
+        int byteLimit = Mathf.Min( Transport.activeTransport.GetMaxPacketSize() , 16384 ) - 100;
         int bytesLength = bytes.Length;
         int fullBatches = bytesLength / byteLimit;
         int finalBatchLength = bytesLength % byteLimit;

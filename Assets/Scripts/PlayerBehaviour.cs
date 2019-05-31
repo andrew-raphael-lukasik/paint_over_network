@@ -5,7 +5,8 @@ using System.IO.Compression;
 using LZMA = SevenZip.Compression.LZMA.SevenZipHelper;
 
 using UnityEngine;
-using UnityEngine.Networking;
+
+using Mirror;
 
 public class PlayerBehaviour : NetworkBehaviour
 {
@@ -37,75 +38,66 @@ public class PlayerBehaviour : NetworkBehaviour
     #region PUBLIC METHODS
 
 
-    [Command(channel=2)]
+    [Command]
     public void CmdBufferCreate ( int buffer , int length , string logMessage )
     {
-        Debug.LogWarning($"{nameof(CmdBufferCreate)} called");
+        #if DEBUG
+        //Debug.Log($"{nameof(CmdBufferCreate)} called");
         UnityEngine.Assertions.Assert.IsFalse( rawDataBuffers.ContainsKey(buffer) , $"{nameof(rawDataBuffers)} contains '{buffer}' buffer already!" );
+        #endif
+
         rawDataBuffers.Add( buffer , new byte[length] );
         if( logMessage!=null ) Debug.Log( logMessage );
     }
 
-    [Command(channel=2)]
+    [Command]
     public void CmdBufferClose ( int buffer , string logMessage )
     {
-        Debug.LogWarning($"{nameof(CmdBufferClose)} called");
+        #if DEBUG
+        //Debug.Log($"{nameof(CmdBufferClose)} called");
         UnityEngine.Assertions.Assert.IsTrue( rawDataBuffers.ContainsKey(buffer) , $"{nameof(rawDataBuffers)} contains no '{buffer}' buffer" );
+        #endif
+
         rawDataBuffers.Remove( buffer );
         if( logMessage!=null ) Debug.Log( logMessage );
     }
     
-    [Command(channel=2)]
+    [Command]
     public void CmdBufferSendBytes ( int buffer , byte[] bytes , int index )
     {
-        Debug.LogWarning($"{nameof(CmdBufferSendBytes)} called");
+        #if DEBUG
+        //Debug.Log($"{nameof(CmdBufferSendBytes)} called");
         UnityEngine.Assertions.Assert.IsTrue( rawDataBuffers.ContainsKey(buffer) , $"{nameof(rawDataBuffers)} contains no '{buffer}' buffer" );
+        #endif
+        
         bytes.CopyTo( rawDataBuffers[buffer] , index );
     }
     
-    [Command(channel=2)]
+    [Command]
     public void CmdBufferCreateTexture ( int buffer , int width , int height , TextureFormat textureFormat , int mipmapCount )
     {
-        Debug.LogWarning($"{nameof(CmdBufferCreateTexture)} called");
+        #if DEBUG
+        //Debug.Log($"{nameof(CmdBufferCreateTexture)} called");
         UnityEngine.Assertions.Assert.IsTrue( rawDataBuffers.ContainsKey(buffer) , $"{nameof(rawDataBuffers)} contains no '{buffer}' buffer. Existing buffers: {JsonUtility.ToJson(rawDataBuffers.Keys)}" );
-        
+        #endif
+
         //create texture from bytes:
         Texture2D tex = new Texture2D( width , height , textureFormat , mipmapCount , false );
         tex.LoadRawTextureData( LZMA.Decompress(rawDataBuffers[buffer]) );
         tex.Apply();
 
+        //save texture to file:
+        tex.EncodeToPNG().WRITE_FILE(
+            IO.Path.Combine( IO.Path.GetDirectoryName( Application.dataPath ) , $"{buffer}.png" )
+        );
+
+        //downsize texture to save memory:
+        tex.ScaleTexture8bit( 256 , 256 , false );
+
         //instantiate scene object:
         var instance = Instantiate( _imagePrefab , FindObjectOfType<ServerBehaviour>().gallery.transform );
         instance.rawImage.texture = tex;
     }
-
-    // public static byte[] Compress ( byte[] uncompressed )
-    // {
-    //     IO.MemoryStream strm = new IO.MemoryStream();
-    //     GZipStream GZipStrem = new GZipStream( strm , CompressionMode.Compress , true );
-    //     GZipStrem.Write( uncompressed , 0 , uncompressed.Length );
-    //     GZipStrem.Flush();
-    //     strm.Flush();
-    //     byte[] compressed = strm.GetBuffer();
-    //     GZipStrem.Close();
-    //     strm.Close();
-    //     return compressed;
-    // }
-    // public static byte[] Decompress ( byte[] compressed )
-    // {
-    //     IO.MemoryStream memoryStream = new IO.MemoryStream( compressed );
-    //     GZipStream GZipStrem = new GZipStream( memoryStream , CompressionMode.Decompress , true );
-    //     List<byte> uncompressed = new List<byte>( compressed.Length*2 );
-    //     int bytesRead = GZipStrem.ReadByte();
-    //     while( bytesRead!=-1 )
-    //     {
-    //         uncompressed.Add( (byte)bytesRead );
-    //         bytesRead = GZipStrem.ReadByte();
-    //     }
-    //     GZipStrem.Flush(); GZipStrem.Close();
-    //     memoryStream.Flush(); memoryStream.Close();
-    //     return uncompressed.ToArray();
-    // }
 
     #endregion
 }
