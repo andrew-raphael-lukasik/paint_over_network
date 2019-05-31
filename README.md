@@ -1,4 +1,4 @@
-# EXPERIMENT: send textures via (unet) network, fast
+# Draw and send textures via network
 
 Features:
 - client can draw simple pictures
