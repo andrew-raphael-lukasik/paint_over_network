@@ -1,4 +1,4 @@
-# TEST: Draw, compress and send textures via network
+# TEST: Draw, compress and send textures to server using mirror networking stack
 
 Features:
 - client can draw simple pictures
